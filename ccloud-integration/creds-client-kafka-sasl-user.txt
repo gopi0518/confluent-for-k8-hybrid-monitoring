@@ -1,2 +1,2 @@
-username=TYR56O3DDKWZM6VW
-password=49qI1uxtW8yJyEbxRS5cbQ8itASC9qLkDPk1//Mx0JLv2WRRS5tUMgqGE2FcvX+8\
+username=TYR56O
+password=49qI1uxtW8yJyEbx
