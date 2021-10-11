@@ -148,4 +148,4 @@ password: admin
 
 ## Kafka consumer lag
 
-![Kafka consumer lag_Dashboard](/images/kafka-lag.jpg)
+![Kafka consumer lag_Dashboard](/images/kafka-lag.png)
