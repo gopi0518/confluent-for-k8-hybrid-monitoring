@@ -135,7 +135,7 @@ password: admin
 
 
 ## Self-managed conenctors
-![connectors monitoeing_dashboards](/images/connector.jpeg)
+![connectors monitoring_dashboards](/images/connector.jpeg)
 
 ## Self-managed KSQLDB
 
