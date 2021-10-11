@@ -135,17 +135,17 @@ password: admin
 
 
 ## Self-managed conenctors
-![connectors monitoring_dashboards](/images/connector.jpeg)
+![connectors monitoring_dashboards](/images/connector.jpg)
 
 ## Self-managed KSQLDB
 
-![ksqldb Monitoring Dashboard](/images/ksqldb.jpeg)
+![ksqldb Monitoring Dashboard](/images/ksqldb.jpg)
 
 ## Confluent cloud
 
-![ccloud_monitoring_dashboard](/images/ccloud.jpeg)
+![ccloud_monitoring_dashboard](/images/ccloud.jpg)
 
 
 ## Kafka consumer lag
 
-![Kafka consumer lag_Dashboard](/images/kafka-lag.jpeg)
+![Kafka consumer lag_Dashboard](/images/kafka-lag.jpg)
