@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-grafana-dp
+  namespace: confluent
+  labels:
+    app: prometheus-grafana-dp
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: prometheus-grafana-dp
+  template:
+    metadata:
+      labels:
+        app: prometheus-grafana-dp
+    spec:
+      containers:
+      - name: prometheus
+        image: prom/prometheus:v2.29.2
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9090
+          protocol: TCP
+        volumeMounts:
+          - mountPath: "/etc/prometheus"
+            name: monitor-config
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      - name: grafana
+        image: grafana/grafana:8.1.3
+        env:
+        - name: GF_SECURITY_ADMIN_USER
+          value: "admin"
+        - name: GF_SECURITY_ADMIN_PASSWORD
+          value: "admin"
+        - name: GF_USERS_ALLOW_SIGN_UP
+          value: "false"
+        - name: GF_INSTALL_PLUGINS
+          value: grafana-piechart-panel
+        ports:
+          - containerPort: 3000
+            protocol: TCP
+        volumeMounts:
+          - mountPath: "/etc/grafana/provisioning/dashboards"
+            name: dashboard-config
+          - mountPath: "/etc/grafana/provisioning/datasources"
+            name: datasource-config
+      volumes:
+      - name: "monitor-config"
+        configMap:
+          name: monitor-config
+          items:
+          - key: "prometheus.yml"
+            path: "prometheus.yml"
+      - name: "datasource-config"
+        configMap:
+          name: grafana-datasource
+          items:
+          - key: "datasource.yml"
+            path: "datasource.yml"
+      - name: "dashboard-config"
+        configMap:
+          name: dashboard-config
+          items:
+          - key: "connect-overview.json"
+            path: "connect-overview.json"
+          - key: "kafka-lag-exporter.json"
+            path: "kafka-lag-exporter.json"
+          - key: "dashboard.yml"
+            path: "dashboard.yml"
+          - key: "ksqldb-overview.json"
+            path: "ksqldb-overview.json"
+          - key: "ccloud-exporter.json"
+            path: "ccloud-exporter.json"
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-grafana-svc
+  labels:
+    app: prometheus-grafana-dp
+spec:
+  ports:
+  - port: 9090
+    protocol: TCP
+    name: prometheus
+  - port: 3000
+    protocol: TCP
+    name: grafana
+  selector:
+    app: prometheus-grafana-dp

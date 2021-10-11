@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: lkc-33o2m
+  name: lkc-33o2m-dp
+  namespace: confluent
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: lkc-33o2m
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: lkc-33o2m
+    spec:
+      containers:
+      - name: ccloudexporter
+        image: dabz/ccloudexporter:latest
+        envFrom:
+          - secretRef:
+              name: lkc-33o2m-vars
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 2112
+          protocol: TCP
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ccloud-svc
+  labels:
+    app: lkc-33o2m
+spec:
+  ports:
+  - port: 2112
+    protocol: TCP
+  selector:
+    app: lkc-33o2m
