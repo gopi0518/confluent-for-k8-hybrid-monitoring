@@ -109,9 +109,9 @@ Prometheus and Grafana set up:
    
 1.  Create configmaps with Prometheus and Grafana dashboard files (data source and dashboards)
 
-    `kubectl create configmap grafana-datasource --from-file=$CONFLUENT_HYBRID/monitoring/config/grafana/datasources
+    `kubectl create configmap grafana-datasource --from-file=$CONFLUENT_HYBRID/monitoring/config/grafana/datasources`
 
-     kubectl create configmap dashboard-config --from-file=$CONFLUENT_HYBRID/monitoring/config/grafana/dashboards`
+     `kubectl create configmap dashboard-config --from-file=$CONFLUENT_HYBRID/monitoring/config/grafana/dashboards`
 
 2.  Deploy Prometheus and Grafana
 
