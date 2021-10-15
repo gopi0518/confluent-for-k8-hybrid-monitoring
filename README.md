@@ -26,6 +26,7 @@ Please note that this not **production ready** repo, pick up the assets (grafana
 
 kubectl get pods
 7.	Generate a CA pair to use in this tutorial(this tutorial uses self-signed certificates):
+
 `openssl genrsa -out $CONFLUENT_HYBRID/ca-key.pem 2048
 openssl req -new -key $CONFLUENT_HYBRID/ca-key.pem -x509 \
   -days 1000 \
