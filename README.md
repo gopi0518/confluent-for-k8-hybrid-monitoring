@@ -46,7 +46,7 @@ Create a Kubernetes secret object for Confluent Cloud Kafka access. This secret 
 
 `kubectl create secret generic cloud-sr-access --from-file=basic.txt=$CONFLUENT_HYBRID/creds-schemaRegistry-user.txt`
 
-`kubectl create secret generic control-center-user --from-file=basic.txt=$TUTORIAL_HOME/creds-control-center-users.txt`
+`kubectl create secret generic control-center-user --from-file=basic.txt=$CONFLUENT_HYBRID/creds-control-center-users.txt`
 
 10.	Deploy confluent platform
 Edit the confluent-platform.yaml deployment YAML, and add your respective Confluent Cloud URLs in the following places:
