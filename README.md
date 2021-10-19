@@ -81,8 +81,11 @@ Confluent cloud cluster metrics set up:
 1.	Create secret file for ccloud metrics api
     
     `export CCLOUD_CLUSTER=<<confluent cloud cluster name>>`
+    
     `export CCLOUD_API_KEY=<<confluent cloud api key>>`
+    
     `export CCLOUD_API_SECRET=<<confluent cloud api secret>>`
+    
      
  Note: Service account associated with APIKey should have metrics viewer role to pull the metrics from confluent cloud. Refer this to grant metrics viewer role access.
  
