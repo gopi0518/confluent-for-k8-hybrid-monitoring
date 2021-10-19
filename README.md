@@ -35,9 +35,7 @@ kubectl get pods
   
 8.	Create a Kubernetes secret for inter-component TLS:
 
-`kubectl create secret tls ca-pair-sslcerts \
-  --cert=$CONFLUENT_HYBRID/ca.pem \
-  --key=$CONFLUENT_HYBRID/ca-key.pem`
+`kubectl create secret tls ca-pair-sslcerts --cert=$CONFLUENT_HYBRID/ca.pem --key=$CONFLUENT_HYBRID/ca-key.pem`
   
 9.	Provide authentication credentials
 
