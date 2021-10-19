@@ -31,10 +31,7 @@ kubectl get pods
 `openssl genrsa -out $CONFLUENT_HYBRID/ca-key.pem 2048`
 
 
-`openssl req -new -key $CONFLUENT_HYBRID/ca-key.pem -x509 \
- -days 1000 \
- -out $CONFLUENT_HYBRID/ca.pem \
- -subj "/C=US/ST=CA/L=MountainView/O=Confluent/OU=Operator/CN=TestCA"`
+`openssl req -new -key $CONFLUENT_HYBRID/ca-key.pem -x509 -days 1000 -out $CONFLUENT_HYBRID/ca.pem -subj "/C=US/ST=CA/L=MountainView/O=Confluent/OU=Operator/CN=TestCA"`
   
 8.	Create a Kubernetes secret for inter-component TLS:
 
