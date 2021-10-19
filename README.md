@@ -43,7 +43,9 @@ Confluent Cloud provides you an API key for both Kafka and Schema Registry. Conf
 Create a Kubernetes secret object for Confluent Cloud Kafka access. This secret object contains file based properties. These files are in the format that each respective Confluent component requires for authentication credentials.
 
 `kubectl create secret generic cloud-plain --from-file=plain.txt=$CONFLUENT_HYBRID/creds-client-kafka-sasl-user.txt`
+
 `kubectl create secret generic cloud-sr-access --from-file=basic.txt=$CONFLUENT_HYBRID/creds-schemaRegistry-user.txt`
+
 `kubectl create secret generic control-center-user --from-file=basic.txt=$TUTORIAL_HOME/creds-control-center-users.txt`
 
 10.	Deploy confluent platform
