@@ -42,13 +42,10 @@ kubectl get pods
 Confluent Cloud provides you an API key for both Kafka and Schema Registry. Configure Confluent For Kubernetes to use the API key when setting up Connect and ksqlDB to connect.
 Create a Kubernetes secret object for Confluent Cloud Kafka access. This secret object contains file based properties. These files are in the format that each respective Confluent component requires for authentication credentials.
 
-`kubectl create secret generic cloud-plain \
---from-file=plain.txt=$CONFLUENT_HYBRID/creds-client-kafka-sasl-user.txt
-kubectl create secret generic cloud-sr-access \
---from-file=basic.txt=$CONFLUENT_HYBRID/creds-schemaRegistry-user.txt`
+`kubectl create secret generic cloud-plain --from-file=plain.txt=$CONFLUENT_HYBRID/creds-client-kafka-sasl-user.txt
+kubectl create secret generic cloud-sr-access --from-file=basic.txt=$CONFLUENT_HYBRID/creds-schemaRegistry-user.txt`
 
-`kubectl create secret generic control-center-user \
---from-file=basic.txt=$TUTORIAL_HOME/creds-control-center-users.txt`
+`kubectl create secret generic control-center-user --from-file=basic.txt=$TUTORIAL_HOME/creds-control-center-users.txt`
 
 10.	Deploy confluent platform
 Edit the confluent-platform.yaml deployment YAML, and add your respective Confluent Cloud URLs in the following places:
@@ -81,8 +78,7 @@ Confluent cloud cluster metrics set up:
 
 2.	Replace ccloud cluster id in deployment yaml file
 
-    `sed s/%CCLOUD_CLUSTER%/$CCLOUD_CLUSTER/g \
-    $CONFLUENT_HYBRID/monitoring/ccloud_exporter.yaml > $CONFLUENT_HYBRID/monitoring/ccloud_exporter-$CCLOUD_CLUSTER.yaml`
+    `sed s/%CCLOUD_CLUSTER%/$CCLOUD_CLUSTER/g $CONFLUENT_HYBRID/monitoring/ccloud_exporter.yaml > $CONFLUENT_HYBRID/monitoring/ccloud_exporter-$CCLOUD_CLUSTER.yaml`
 
 3.	Deploy ccloud_exporter
 
