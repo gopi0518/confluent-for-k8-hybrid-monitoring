@@ -41,9 +41,11 @@ openssl req -new -key $CONFLUENT_HYBRID/ca-key.pem -x509 \
 9.	Provide authentication credentials
 Confluent Cloud provides you an API key for both Kafka and Schema Registry. Configure Confluent For Kubernetes to use the API key when setting up Connect and ksqlDB to connect.
 Create a Kubernetes secret object for Confluent Cloud Kafka access. This secret object contains file based properties. These files are in the format that each respective Confluent component requires for authentication credentials.
+
 `kubectl create secret generic cloud-plain \
---from-file=plain.txt=$CONFLUENT_HYBRID/creds-client-kafka-sasl-user.txt
-kubectl create secret generic cloud-sr-access \
+--from-file=plain.txt=$CONFLUENT_HYBRID/creds-client-kafka-sasl-user.txt`
+
+`kubectl create secret generic cloud-sr-access \
 --from-file=basic.txt=$CONFLUENT_HYBRID/creds-schemaRegistry-user.txt`
 
 `kubectl create secret generic control-center-user \
@@ -67,9 +69,9 @@ Confluent cloud cluster metrics set up:
 
 1.	Create secret file for ccloud metrics api
     
-    'export CCLOUD_CLUSTER=<<confluent cloud cluster name>>
-     export CCLOUD_API_KEY=<<confluent cloud api key>>
-     export CCLOUD_API_SECRET=<<confluent cloud api secret>>'
+    `export CCLOUD_CLUSTER=<<confluent cloud cluster name>>`
+    `export CCLOUD_API_KEY=<<confluent cloud api key>>`
+    `export CCLOUD_API_SECRET=<<confluent cloud api secret>>`
      
  Note: Service account associated with APIKey should have metrics viewer role to pull the metrics from confluent cloud. Refer this to grant metrics viewer role access.
  
