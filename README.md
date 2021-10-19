@@ -25,6 +25,7 @@ Please note that this not **production ready** repo, pick up the assets (grafana
 6.	Check that the Confluent For Kubernetes pod comes up and is running:
 
 kubectl get pods
+
 7.	Generate a CA pair to use in this tutorial(this tutorial uses self-signed certificates):
 
 `openssl genrsa -out $CONFLUENT_HYBRID/ca-key.pem 2048
@@ -40,6 +41,7 @@ openssl req -new -key $CONFLUENT_HYBRID/ca-key.pem -x509 \
   --key=$CONFLUENT_HYBRID/ca-key.pem`
   
 9.	Provide authentication credentials
+
 Confluent Cloud provides you an API key for both Kafka and Schema Registry. Configure Confluent For Kubernetes to use the API key when setting up Connect and ksqlDB to connect.
 Create a Kubernetes secret object for Confluent Cloud Kafka access. This secret object contains file based properties. These files are in the format that each respective Confluent component requires for authentication credentials.
 
