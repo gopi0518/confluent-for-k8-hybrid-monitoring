@@ -30,6 +30,7 @@ kubectl get pods
 
 `openssl genrsa -out $CONFLUENT_HYBRID/ca-key.pem 2048`
 
+
 `openssl req -new -key $CONFLUENT_HYBRID/ca-key.pem -x509 \
   -days 1000 \
   -out $CONFLUENT_HYBRID/ca.pem \
