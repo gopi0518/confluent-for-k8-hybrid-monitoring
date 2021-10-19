@@ -28,8 +28,9 @@ kubectl get pods
 
 7.	Generate a CA pair to use in this tutorial(this tutorial uses self-signed certificates):
 
-`openssl genrsa -out $CONFLUENT_HYBRID/ca-key.pem 2048
-openssl req -new -key $CONFLUENT_HYBRID/ca-key.pem -x509 \
+`openssl genrsa -out $CONFLUENT_HYBRID/ca-key.pem 2048`
+
+`openssl req -new -key $CONFLUENT_HYBRID/ca-key.pem -x509 \
   -days 1000 \
   -out $CONFLUENT_HYBRID/ca.pem \
   -subj "/C=US/ST=CA/L=MountainView/O=Confluent/OU=Operator/CN=TestCA"`
