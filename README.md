@@ -1,5 +1,5 @@
 # confluent-for-k8-hybrid-monitoring
-This repo is to deploy a self-managed connect cluster, KSQLDB and control center backed confluent cloud and configuring centralized monitoring.
+This repo is to deploy a self-managed connect cluster, KSQLDB, Rest Proxy and control center backed confluent cloud and configuring centralized monitoring.
 
 Please note that this not **production ready** repo, pick up the assets (grafana dashboards, prometheus config) and integrate with your k8 deployment.
 
