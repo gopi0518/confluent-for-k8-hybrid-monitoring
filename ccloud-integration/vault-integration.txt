@@ -1,0 +1,54 @@
+1. Add vault helm repo
+helm repo add hashicorp https://helm.releases.hashicorp.com
+2. Update the helm repo
+helm repo update
+3. Install valut helm template
+helm install vault hashicorp/vault --set "server.dev.enabled=true"
+
+4. Validate all the pods
+
+kubectl get pods
+
+5. Set secret in Vault
+
+kubectl exec -it vault-0 -- /bin/sh
+
+6. Create valut secret at path
+
+vault kv put internal/ccloud/config username="TYR56O3DDKWZM6VW" password="49qI1uxtW8yJyEbxRS5cbQ8itASC9qLkDPk1//Mx0JLv2WRRS5tUMgqGE2FcvX+8\"
+
+7.  vault kv get internal/ccloud/config
+8.  Configure kubernetes authentication
+kubectl exec -it vault-0 -- /bin/sh
+vault auth enable kubernetes
+
+Configure the Kubernetes authentication method to use the location of the Kubernetes API
+
+vault write auth/kubernetes/config \
+    kubernetes_host="https://$KUBERNETES_PORT_443_TCP_ADDR:443" \
+    token_reviewer_jwt="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
+    kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+
+    / $ vault write auth/kubernetes/config \
+    token_reviewer_jwt="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
+    kubernetes_host="https://$KUBERNETES_PORT_443_TCP_ADDR:443" \
+    kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+
+9. read capability for the secret path
+
+vault policy write internal-app - <<EOF
+path "internal/ccloud/config" {
+  capabilities = ["read"]
+}
+EOF
+
+10. Kubernetes authentication role
+
+vault write auth/kubernetes/role/internal-app \
+    bound_service_account_names=internal-app \
+    bound_service_account_namespaces=default \
+    policies=internal-app \
+    ttl=24h
+11.
+
+openssl s_client -showcerts -connect gopi-test.servicebus.windows.net:443 </dev/null 2>/dev/null|openssl x509 -outform PEM >mycertfile.pem
